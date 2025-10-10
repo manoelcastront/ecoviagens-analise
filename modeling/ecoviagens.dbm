@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="1.1.3" use-changelog="false" max-obj-count="10"
+	 last-position="314,115" last-zoom="0.75" scene-rect="-8,-210,2100.5,1286.8"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<database name="ecoviagens" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" layers="0" rect-visible="true" fill-color="#e1e1e1" name-color="#000000" sql-disabled="true">
+</schema>
+
+<schema name="ecoviagens" layers="0" rect-visible="true" fill-color="#e1e1e1" name-color="#15397d">
+	<role name="postgres"/>
+</schema>
+
+<table name="cliente" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="ecoviagens"/>
+	<role name="postgres"/>
+	<position x="440" y="320"/>
+	<column name="id_cliente" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nome" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="email" not-null="true">
+		<type name="varchar" length="150"/>
+	</column>
+	<column name="data_nascimento" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="genero" not-null="true">
+		<type name="varchar" length="10"/>
+	</column>
+	<column name="localidade" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<constraint name="id_cliente" type="pk-constr" table="ecoviagens.cliente">
+		<columns names="id_cliente" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="email_uq" type="uq-constr" table="ecoviagens.cliente">
+		<columns names="email" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="genero" type="ck-constr" table="ecoviagens.cliente">
+			<expression> <![CDATA[genero IN ('Masculino', 'Feminino')]]> </expression>
+	</constraint>
+</table>
+
+<table name="operador" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="ecoviagens"/>
+	<role name="postgres"/>
+	<position x="1760" y="360"/>
+	<column name="id_operador" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nome" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="cnpj" not-null="true">
+		<type name="varchar" length="18"/>
+	</column>
+	<column name="contato" not-null="true">
+		<type name="varchar" length="20"/>
+	</column>
+	<column name="email" not-null="true">
+		<type name="varchar" length="150"/>
+	</column>
+	<column name="localidade" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<constraint name="id_operador" type="pk-constr" table="ecoviagens.operador">
+		<columns names="id_operador" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="cnpj_uq" type="uq-constr" table="ecoviagens.operador">
+		<columns names="cnpj" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="email" type="uq-constr" table="ecoviagens.operador">
+		<columns names="email" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="contato" type="uq-constr" table="ecoviagens.operador">
+		<columns names="contato" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="cnpj_ck" type="ck-constr" table="ecoviagens.operador">
+			<expression> <![CDATA[cnpj ~ '^[0-9]{2}\.[0-9]{3}\.[0-9]{3}/[0-9]{4}-[0-9]{2}$']]> </expression>
+	</constraint>
+</table>
+
+<table name="oferta" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="ecoviagens"/>
+	<role name="postgres"/>
+	<position x="1340" y="360"/>
+	<column name="id_oferta" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="tipo_oferta" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="titulo" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="descricao" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="preco" not-null="true">
+		<type name="decimal" length="10" precision="2"/>
+	</column>
+	<column name="id_operador">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="id_oferta" type="pk-constr" table="ecoviagens.oferta">
+		<columns names="id_oferta" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="tipo_oferta" type="ck-constr" table="ecoviagens.oferta">
+			<expression> <![CDATA[tipo_oferta IN ('Atividade', 'Hospedagem')]]> </expression>
+	</constraint>
+</table>
+
+<table name="atividade" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="ecoviagens"/>
+	<role name="postgres"/>
+	<position x="1260" y="700"/>
+	<column name="id_oferta" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nivel_dificuldade" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="duracao" not-null="true">
+		<type name="interval" length="0" interval-type="HOUR"/>
+	</column>
+	<column name="grupo_maximo" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="id_oferta_pk_atv" type="pk-constr" table="ecoviagens.atividade">
+		<columns names="id_oferta" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="nivel_dificuldade" type="ck-constr" table="ecoviagens.atividade">
+			<expression> <![CDATA[nivel_dificuldade IN ('Fácil', 'Médio', 'Difícil')]]> </expression>
+	</constraint>
+</table>
+
+<table name="hospedagem" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="ecoviagens"/>
+	<role name="postgres"/>
+	<position x="1620" y="700"/>
+	<column name="id_oferta" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="tipo_acomodacao" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="capacidade" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="possui_cafe_manha" not-null="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<constraint name="id_oferta_pk_hpd" type="pk-constr" table="ecoviagens.hospedagem">
+		<columns names="id_oferta" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="reserva" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="ecoviagens"/>
+	<role name="postgres"/>
+	<position x="900" y="200"/>
+	<column name="id_reserva" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="id_cliente">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="id_oferta">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="data_reserva" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="data_experiencia" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="qtd_pessoas" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="status" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="id_reserva" type="pk-constr" table="ecoviagens.reserva">
+		<columns names="id_reserva" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="status" type="ck-constr" table="ecoviagens.reserva">
+			<expression> <![CDATA[status IN ('Confirmada', 'Cancelada', 'Concluída')]]> </expression>
+	</constraint>
+</table>
+
+<table name="avaliacao" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="ecoviagens"/>
+	<role name="postgres"/>
+	<position x="900" y="520"/>
+	<column name="id_avaliacao" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="id_cliente">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="id_oferta">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nota" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="comentario">
+		<type name="text" length="0"/>
+	</column>
+	<column name="data_avaliacao" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="id_avaliacao" type="pk-constr" table="ecoviagens.avaliacao">
+		<columns names="id_avaliacao" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="pratica_sustentavel" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="ecoviagens"/>
+	<role name="postgres"/>
+	<position x="1600" y="200"/>
+	<column name="id_pratica" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="descricao" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<constraint name="id_pratica" type="pk-constr" table="ecoviagens.pratica_sustentavel">
+		<columns names="id_pratica" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="oferta_pratica" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="ecoviagens"/>
+	<role name="postgres"/>
+	<position x="1220" y="120"/>
+	<column name="id_oferta" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="id_pratica" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="id_oferta_pratica" type="pk-constr" table="ecoviagens.oferta_pratica">
+		<columns names="id_oferta,id_pratica" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="id_operador" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="ecoviagens.operador" table="ecoviagens.oferta">
+	<columns names="id_operador" ref-type="src-columns"/>
+	<columns names="id_operador" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="id_oferta_fk_atv" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="ecoviagens.oferta" table="ecoviagens.atividade">
+	<columns names="id_oferta" ref-type="src-columns"/>
+	<columns names="id_oferta" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="id_oferta_fk_hpd" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="ecoviagens.oferta" table="ecoviagens.hospedagem">
+	<columns names="id_oferta" ref-type="src-columns"/>
+	<columns names="id_oferta" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="id_cliente" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="ecoviagens.cliente" table="ecoviagens.reserva">
+	<columns names="id_cliente" ref-type="src-columns"/>
+	<columns names="id_cliente" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="id_oferta" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="ecoviagens.oferta" table="ecoviagens.reserva">
+	<columns names="id_oferta" ref-type="src-columns"/>
+	<columns names="id_oferta" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="id_cliente" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="ecoviagens.cliente" table="ecoviagens.avaliacao">
+	<columns names="id_cliente" ref-type="src-columns"/>
+	<columns names="id_cliente" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="id_oferta" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="ecoviagens.oferta" table="ecoviagens.avaliacao">
+	<columns names="id_oferta" ref-type="src-columns"/>
+	<columns names="id_oferta" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="id_oferta" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="ecoviagens.oferta" table="ecoviagens.oferta_pratica">
+	<columns names="id_oferta" ref-type="src-columns"/>
+	<columns names="id_oferta" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="id_pratica" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="ecoviagens.pratica_sustentavel" table="ecoviagens.oferta_pratica">
+	<columns names="id_pratica" ref-type="src-columns"/>
+	<columns names="id_pratica" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_atividade_oferta" type="relfk" layers="0"
+	 src-table="ecoviagens.atividade"
+	 dst-table="ecoviagens.oferta" reference-fk="id_oferta_fk_atv"
+	 src-required="false" dst-required="true">
+	<label ref-type="name-label">
+		<position x="74.6856" y="-24.053"/>
+	</label>
+</relationship>
+
+<relationship name="rel_hospedagem_oferta" type="relfk" layers="0"
+	 src-table="ecoviagens.hospedagem"
+	 dst-table="ecoviagens.oferta" reference-fk="id_oferta_fk_hpd"
+	 src-required="false" dst-required="true">
+	<label ref-type="name-label">
+		<position x="151.174" y="-4.05299"/>
+	</label>
+</relationship>
+
+<relationship name="rel_reserva_cliente" type="relfk" layers="0"
+	 src-table="ecoviagens.reserva"
+	 dst-table="ecoviagens.cliente" reference-fk="id_cliente"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="11.0045" y="12.0505"/>
+	</label>
+</relationship>
+
+<relationship name="rel_avaliacao_cliente" type="relfk" layers="0"
+	 src-table="ecoviagens.avaliacao"
+	 dst-table="ecoviagens.cliente" reference-fk="id_cliente"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="-22.9955" y="34.3523"/>
+	</label>
+</relationship>
+
+<relationship name="rel_oferta_pratica_pratica_sustentavel" type="relfk" layers="0"
+	 src-table="ecoviagens.oferta_pratica"
+	 dst-table="ecoviagens.pratica_sustentavel" reference-fk="id_pratica"
+	 src-required="false" dst-required="true">
+	<label ref-type="name-label">
+		<position x="95.9637" y="-86.1402"/>
+	</label>
+</relationship>
+
+<relationship name="rel_oferta_operador" type="relfk" layers="0"
+	 src-table="ecoviagens.oferta"
+	 dst-table="ecoviagens.operador" reference-fk="id_operador"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_reserva_oferta" type="relfk" layers="0"
+	 src-table="ecoviagens.reserva"
+	 dst-table="ecoviagens.oferta" reference-fk="id_oferta"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="-10.0705" y="9.27146"/>
+	</label>
+</relationship>
+
+<relationship name="rel_avaliacao_oferta" type="relfk" layers="0"
+	 src-table="ecoviagens.avaliacao"
+	 dst-table="ecoviagens.oferta" reference-fk="id_oferta"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0.929505" y="19.9726"/>
+	</label>
+</relationship>
+
+<relationship name="rel_oferta_pratica_oferta" type="relfk" layers="0"
+	 src-table="ecoviagens.oferta_pratica"
+	 dst-table="ecoviagens.oferta" reference-fk="id_oferta"
+	 src-required="false" dst-required="true">
+	<label ref-type="name-label">
+		<position x="-116.18" y="-41.853"/>
+	</label>
+</relationship>
+
+</dbmodel>

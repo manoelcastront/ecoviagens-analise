@@ -2,6 +2,17 @@
 
 # Projeto EcoViagens — Análise e Inteligência de Negócios em Turismo Sustentável  
 
+## Índice
+
+- [Visão Geral](#-visão-geral)
+- [Modelagem de Dados](#-modelagem-de-dados)
+- [Definição de KPIs](#-definição-de-kpis)
+- [Análise — SQL](#-análise--sql)
+- [Dashboard — Power BI](#-dashboard--power-bi)
+- [Conclusões e Recomendações](#-conclusões-e-recomendações)
+- [Estrutura do Projeto](#-estrutura-do-projeto)
+
+
 ## 📘 Visão Geral  
 
 O presente projeto foi desenvolvido com o objetivo de avaliar o **desempenho operacional da EcoViagens** em seu primeiro ano de atividade, uma startup de turismo sustentável voltada à oferta de experiências ecológicas em parceria com operadores locais.  

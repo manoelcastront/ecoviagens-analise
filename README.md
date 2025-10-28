@@ -1,6 +1,6 @@
 ![alt text](ecoviagens-logo.png)
 
-# 🌱 Projeto EcoViagens — Análise e Inteligência de Negócios em Turismo Sustentável  
+# Projeto EcoViagens — Análise e Inteligência de Negócios em Turismo Sustentável  
 
 ## 📘 Visão Geral  
 
